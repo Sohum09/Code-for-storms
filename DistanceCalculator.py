@@ -18,4 +18,6 @@ d_km = radius * math.acos(math.sin(x1) * math.sin(x2) + math.cos(x1) * math.cos(
 d_nm = d_km * 0.539957 #Finding the equivalent in nautical miles
 
 #Print the output:
+d_km = "{:.2f}".format(d_km)
+d_nm = "{:.2f}".format(d_nm)
 print("Distance in km: ", d_km, "km, in nautical miles: ", d_nm, "nm")
