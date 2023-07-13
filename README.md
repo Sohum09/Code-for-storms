@@ -8,3 +8,4 @@ Since the script uses a file as input, I have enclosed the For storms.txt file t
 6. ATCF_to_HURDAT_Modern.py - A Python script composed by my friend Kathy Chan that is a logical extention of the other converter script. This converts modern ATCF BT to HURDAT format for the BT. As always, since this takes file as input, I've put in the For storms.txt text file as sample input for this.
 7. MSLPConverter.py - A simple script that takes the altitude of the station, recorded pressure, and temperature to output the equivalent sea level pressure.
 8. DistanceCalculator.py - Input the coordinates of any two points on earth, and the script will output the distance between them in both kilometres as well as nautical miles.
+9. SMAPConverter.py - Very quick script I whipped up that converts the raw 10-min SMAP reading to its equivalent 1-min version using a complicated linear regression equation.
