@@ -3,7 +3,7 @@
 NAME = "DINGANI" #Enter name of the storm that you want to input
 YEAR = 2023 #Enter year that the storm takes place in.
 
-data_tc = pd.read_csv("202313S_Dingani_Track副本.txt", usecols=range(11), header=None)
+data_tc = pd.read_csv("202313S_Dingani_Track.txt", usecols=range(11), header=None)
 col_names = data_tc.columns
 data_tc.columns =['Hem', '#', 'Dt', '.', 'Best', 'O', 'Lat', 'Lon', 'Wind', 'Pressure', 'status']
 n = data_tc.shape[0]
