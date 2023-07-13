@@ -23,8 +23,6 @@ data_tc2['time'] = time%D*100
 data_tc2['time'] = data_tc2['time'].astype('string')
 data_tc2['time'] = data_tc2['time'].apply(lambda x: '{:0>4}'.format(x))
 data_tc2 = data_tc2.drop(['Dt', '.'], axis=1)
-Lat = data_tc2['Lat']
-Lon = data_tc2['Lon']
 data_tc2['Lat']=data_tc2['Lat'].str.replace(r'\w{2}(?!$)', r'\g<0>.', regex=True)
 data_tc2['Lon']=data_tc2['Lon'].str.replace(r'\w{2}(?!$)', r'\g<0>.', regex=True)
 print(F"{data_tc2['Hem'].iloc[-1]}{data_tc2['#'].iloc[-1]}{YEAR}, {NAME:>18}, {m:5},")
