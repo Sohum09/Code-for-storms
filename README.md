@@ -10,3 +10,4 @@ Since the script uses a file as input, I have enclosed the For storms.txt file t
 8. DistanceCalculator.py - Input the coordinates of any two points on earth, and the script will output the distance between them in both kilometres as well as nautical miles.
 9. SMAPConverter.py - Very quick script I whipped up that converts the raw 10-min SMAP reading to its equivalent 1-min version using a complicated linear regression equation.
 10. JordanEqn.py - A quick script I whipped up on request from a friend, that uses the equation to derive pressure estimates from 700mb height as devised by Jordan et al. 1958.
+11. ASCATUndersample.py - A quick script I whipped up. This applies the regression equation developed by Chou et al. 2013 to estimate the true representative windspeeds of a TC from the ASCAT Vmax of a particular pass.
