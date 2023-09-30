@@ -72,14 +72,14 @@ for i in range(num_points):
         plt.scatter(longitudes[i], latitudes[i], color='#ff5908', marker='o')
       ax.add_patch(circle)
 
-    elif forecast_winds[i] >= 85: #C2
-      circle = plt.Circle((longitudes[i], latitudes[i]), cone_radius[i], color='#ffa001', alpha=0.2, transform=ccrs.PlateCarree())
-      count = 2
+    elif forecast_winds[i] >= 65: #C1
+      circle = plt.Circle((longitudes[i], latitudes[i]), cone_radius[i], color='#ffff00', alpha=0.2, transform=ccrs.PlateCarree())
+      count = 1
       if count not in dupl:
-        plt.scatter(longitudes[i], latitudes[i], color='#ffa001', marker='o', label='Category 2')
+        plt.scatter(longitudes[i], latitudes[i], color='#ffff00', marker='o', label='Category 1')
         dupl.append(count)
       else:
-        plt.scatter(longitudes[i], latitudes[i], color='#ffa001', marker='o')
+        plt.scatter(longitudes[i], latitudes[i], color='#ffff00', marker='o')
       ax.add_patch(circle)
 
     elif forecast_winds[i] >= 65: #C1
