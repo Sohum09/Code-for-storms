@@ -5,7 +5,6 @@
 height = float(input("Enter the observed 700mb Height (in m): "))
 Pc = 0
 
-
 Pc = 645 + 0.115 * height
 Pc = "{:.2f}".format(Pc)
 
