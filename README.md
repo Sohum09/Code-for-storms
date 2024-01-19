@@ -13,3 +13,4 @@ Since the script uses a file as input, I have enclosed the For storms.txt file t
 11. ASCATUndersample.py - A quick script I whipped up. This applies the regression equation developed by Chou et al. 2013 to estimate the true representative windspeeds of a TC from the ASCAT Vmax of a particular pass.
 12. ConeForecast.py - A python script where you input the coordinates and the wind forecasts of a storm, and a cone will be produced of your choice. Detailed instructions have been enclosed in the documentation so please do give it a read.
 13. PlotWPACReconGraph.py - A python script where you input the data according to the format and the output is the recon data for all storms pre-1987 in the WPAC that got recon.
+14. ATCFReader.py - A test python script that reads the ATCF Sector File and displays the latest updated values in the ATCF Format. I may expand on this later.
