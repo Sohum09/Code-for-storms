@@ -43,8 +43,6 @@ def displayStormInfo(storm_data):
         'S': "South Indian Ocean",
         'P': "South Pacific Ocean"
         }
-    def getBasin(sid):
-        return basin_list[sid[-1]]
     for storm in storm_data:
         print("-----------------------------------")
         print(f"Storm ID: {storm['atcf_id']}")
@@ -52,7 +50,7 @@ def displayStormInfo(storm_data):
         print(f"Date of Reading: {storm['date']}")
         print(f"Time of Reading: {storm['hour']} UTC")
         print(f"Coordinates: {storm['latitude']}, {storm['longitude']}")
-        print(f"Basin: {storm['basin']} - {getBasin(storm['atcf_id'])}")
+        print(f"Basin: {storm['basin']} - {basin_list[storm['atcf_id'][-1]]}")
         print(f"Intensity: {storm['winds']} Kts / {storm['pressure']} hPa")
 
 #Step 7: To allow the function in Step 6 to work, we will now work on decoding the ATCF data:
