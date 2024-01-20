@@ -25,5 +25,54 @@ def parse_atcf_data(html_content):
 atcf_data = fetch_atcf_data(atcf_url)
 parsed_data = parse_atcf_data(atcf_data)
 
-# Step 5: Display the parsed data
+# Step 5: Display the parsed data in encoded format:
+print("Encoded ATCF Data:\n")
 print(parsed_data)
+print("\n")
+
+# Step 6: We will now display the data by decoding it:
+def displayStormInfo(storm_data):
+    print("Decoded information from the ATCF: \n")
+    basin_list = {
+        'L': "North Atlantic Ocean", 
+        'E': "East Pacific Ocean", 
+        'C': "Central Pacific Ocean", 
+        'W': "Western Pacific Ocean", 
+        'A': "Arabian Sea",
+        'B': "Bay of Bengal",
+        'S': "South Indian Ocean",
+        'P': "South Pacific Ocean"
+        }
+    def getBasin(sid):
+        return basin_list[sid[-1]]
+    for storm in storm_data:
+        print("-----------------------------------")
+        print(f"Storm ID: {storm['atcf_id']}")
+        print(f"Name of Storm: {storm['name']}")
+        print(f"Date of Reading: {storm['date']}")
+        print(f"Time of Reading: {storm['hour']} UTC")
+        print(f"Coordinates: {storm['latitude']}, {storm['longitude']}")
+        print(f"Basin: {storm['basin']} - {getBasin(storm['atcf_id'])}")
+        print(f"Intensity: {storm['winds']} Kts / {storm['pressure']} hPa")
+
+#Step 7: To allow the function in Step 6 to work, we will now work on decoding the ATCF data:
+storm_data = []
+lines = parsed_data.split('\n')
+
+for line in lines:
+    if line.strip():
+        parts = line.split(' ')
+        storm_data.append({
+            'atcf_id': parts[0],
+            'name': parts[1],
+            'date': f"{parts[2][4:]}-{parts[2][2:4]}-{parts[2][:2]}",
+            'hour': parts[3],
+            'latitude': parts[4],
+            'longitude': parts[5],
+            'basin': parts[6],
+            'winds': parts[7],
+            'pressure': parts[8]
+        })
+
+#Step 8: We conclude Steps 6 and 7 to display the decoded data:
+displayStormInfo(storm_data)
