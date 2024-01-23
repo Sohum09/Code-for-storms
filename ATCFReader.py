@@ -42,11 +42,41 @@ def displayStormInfo(storm_data):
         'B': "Bay of Bengal",
         'S': "South Indian Ocean",
         'P': "South Pacific Ocean"
-        }
+    }
+    #Helper function that finds the status of the storm...
+    def designation(basin, winds):
+        winds = int(winds)
+        status = ""
+        if winds >= 130 and basin == 'W':
+            status = "Super Typhoon"
+        elif winds >= 100:
+            if (basin == 'L' or basin == 'E' or basin == 'C'):
+                status = "Major Hurricane"
+            elif basin == 'W':
+                status = "Major Typhoon"
+            else:
+                status = "Major Cyclone"
+        elif winds >= 65:
+            if (basin == 'L' or basin == 'E' or basin == 'C'):
+                status = "Hurricane"
+            elif basin == 'W':
+                status = "Typhoon"
+            else:
+                status = "Cyclone"
+        elif winds >= 50 and (basin == 'W' or basin == 'S'):
+            status = "Severe Tropical Storm"
+        elif winds >= 35:
+            status = "Tropical Storm"
+        elif winds >= 25:
+            status = "Tropical Depression (Autoflagged)"
+        else:
+            status = "Tropical Low"
+        return status
+
     for storm in storm_data:
         print("-----------------------------------")
         print(f"Storm ID: {storm['atcf_id']}")
-        print(f"Name of Storm: {storm['name']}")
+        print(f"Name of Storm: {designation(storm['atcf_id'][-1], storm['winds'])} {storm['name']}")
         print(f"Date of Reading: {storm['date']}")
         print(f"Time of Reading: {storm['hour']} UTC")
         print(f"Coordinates: {storm['latitude']}, {storm['longitude']}")
