@@ -12,7 +12,7 @@ yr = input("Enter year: ")
 IBTRACS_ID = f"{btkID}{yr}"
 cdx, cdy, winds, status, timeCheck = [], [], [], [], []
 storm_name = ""
-
+s_ID = ""
 #Template to read the IBTRACS Data...
 with open('ibtracs.ALL.list.v04r00.csv', mode='r') as file:
     csvFile = csv.reader(file)
@@ -20,7 +20,8 @@ with open('ibtracs.ALL.list.v04r00.csv', mode='r') as file:
         if line_num > 3:
             #Process or print the lines from the 4th line onwards
             #If IBTRACS ID matches the ID on the script...
-            if lines[18] == IBTRACS_ID:
+            if lines[18] == IBTRACS_ID or (btkID == lines[5] and yr == lines[6][:4]):
+                s_ID = lines[18]
                 cdx.append(lines[20])
                 cdy.append(lines[19])
                 winds.append(lines[23])
@@ -154,7 +155,7 @@ plt.plot(LineX, LineY, color="k", linestyle="--")
 #Applying final touches...
 plt.xlabel('Longitude')
 plt.ylabel('Latitude')
-plt.title(f'{btkID}{yr} {storm_name}')
+plt.title(f'{s_ID} {storm_name}')
 plt.title(f'VMAX: {vmax} Kts', loc='left', fontsize=9)
 plt.title(f'ACE: {calc_ACE(winds, timeCheck)}', loc='right', fontsize=9)
 ax.legend(handles=legend_elements, loc='upper right' if btkID[:2]=="SH" or btkID[:2]=="EP" else "upper left")
