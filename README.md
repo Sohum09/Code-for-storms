@@ -18,3 +18,4 @@ Since the script uses a file as input, I have enclosed the For storms.txt file t
 16. BestTrackPlot.py - A python script that on inputting the ATCF id of the storm it plots the Best Track using cartopy and matplotlib.pyplot packages from the NOAA SSD Best Track Archives. Note that IDL crossover storms are not supported.
 17. IBTRACS_BT_READER_NO_IDL.py - This script plots the Best Track using cartopy and matplotlib.pyplot packages from the IBTRACS dataset. This does not support IDL storms and can be used for cases where storms cross the prime meridian in the North Atlantic Ocean.
 18. IBTRACS_BT_READER_IDL.py - The much awaited fix which does the same as the previous entry but now also supports IDL crossover storms.
+19. StormTrackGenerator.py - This is for custom made BT files and can work across the IDL as well. The StormTrack.txt file is included as an example.
