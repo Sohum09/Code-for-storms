@@ -153,7 +153,7 @@ def calc_ACE(btkLines):
     for line in btkLines:
         if line.strip():
             params = line.split(',')
-            if(params[11].strip() == '34'):
+            if(params[11].strip() == '34' and params[10].strip() not in ['DB', 'LO', 'EX', 'WV']):
                 ace += (int(params[8]) ** 2) / 10000
     return "{:.4f}".format(ace)
 
