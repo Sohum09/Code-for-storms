@@ -4,3 +4,12 @@ Step 1: Download the IDE "VSCode" for ease of use purposes. The link to the soft
 https://code.visualstudio.com/
 
 Step 2: Now with the IDE done, open the program for the first time. If you are already using a "workspace" (ie environment for programming) then you can skip this step. However, if you're installing it for the first time, don't worry! The video tutorial below will help you set it up.
+
+https://youtu.be/fe1ozHhunYE?si=ULhSTcoGHMPzTR96
+
+Step 3: With the codespace set up, we can now move to the next step: Installing the required packages for execution. Miniconda3 is a great service that allows for easy installation of Python packages. Go to the link below and install Miniconda3 and follow the installation instructions:
+https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html
+
+Step 4: Once installation is done, it's time to install the required packages. Go to your start button and search for "Miniconda Powershell Prompt" and open it in Administrator Mode (this step is very important, as not doing so can cause installations to fail due to not having the required security permissions to proceed).
+
+(Work In Progress)
