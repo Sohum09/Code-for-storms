@@ -31,4 +31,12 @@ NOTE: Don't forget to place the programs in the codespace that you created! And 
 Link to the dataset is given below:
 https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r00/access/csv/
 
+FORMATS FOR THE STORM GENERATOR:
+For HURDAT2, only the BT points themselves are needed. Omit the heading portion of the track, i.e.,
+"CP032031,            NONA,     14,", can be deleted.
+
+For the ATCF BT, no need to deviate or do anything, they will work as is.
+
+
 And you should be set! DM me @sohum09 in Discord for any issues or troubleshoots you may have.
+
