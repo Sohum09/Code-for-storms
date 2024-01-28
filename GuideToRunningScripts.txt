@@ -1,0 +1,6 @@
+Getting these programs working does need a bit of setup before hand, but it's not an issue! Just follow the steps below and you should be fine.
+
+Step 1: Download the IDE "VSCode" for ease of use purposes. The link to the software is provided below:
+https://code.visualstudio.com/
+
+Step 2: Now with the IDE done, open the program for the first time. If you are already using a "workspace" (ie environment for programming) then you can skip this step. However, if you're installing it for the first time, don't worry! The video tutorial below will help you set it up.
