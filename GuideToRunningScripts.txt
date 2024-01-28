@@ -22,8 +22,9 @@ D. pip install pyproj
 Finally, we can go ahead and install cartopy:
 pip install cartopy
 
-Step 6: We can now make the necessary changes to ensure that the version of Python we are running is the one where the packages are installed.
-Go to VSCode and first create a file (on the file explorer showing the list of programs open on your left side, if you hover over the title you will see 4 options highlight. Click on the left most button.) with a name ending in ".py". VSCode will then prompt you asking you if you want to install the necessary extensions for Python. Go ahead and do so. After that, use the following combination: Ctrl+Shift+P.
+Step 6: We can now make the necessary changes to ensure that the version of Python we are running is the one where the packages are installed. Again, if you are already using Python, skip Step 6A and proceed with Step 6B.
+A. Go to VSCode and first create a file (on the file explorer showing the list of programs open on your left side, if you hover over the title you will see 4 options highlight. Click on the left most button.) with a name ending in ".py". VSCode will then prompt you asking you if you want to install the necessary extensions for Python. Go ahead and do so. 
+B. After that, use the following combination: Ctrl+Shift+P.
 Search for "Python: Change Interpreter"
 And select the Python path that has the file path saying "miniconda3" in it.
 
@@ -37,6 +38,7 @@ For HURDAT2, only the BT points themselves are needed. Omit the heading portion 
 
 For the ATCF BT, no need to deviate or do anything, they will work as is.
 
+And always remember to save the input text file as not saving it can cause errors!
 
 And you should be set! DM me @sohum09 in Discord for any issues or troubleshoots you may have.
 
