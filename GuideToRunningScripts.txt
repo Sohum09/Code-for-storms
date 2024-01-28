@@ -25,4 +25,8 @@ Go to VSCode and use the following combination: Ctrl+Shift+P.
 Search for "Python: Change Interpreter"
 And select the Python path that has the file path saying "miniconda3" in it.
 
+NOTE: Don't forget to place the programs in the codespace that you created! And you need to download the .csv files for the IBTRACS dataset to run the IBTRACS scripts!
+Link to the dataset is given below:
+https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r00/access/csv/
+
 And you should be set! DM me @sohum09 in Discord for any issues or troubleshoots you may have.
