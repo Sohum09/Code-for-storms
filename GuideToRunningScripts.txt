@@ -11,7 +11,7 @@ https://youtu.be/fe1ozHhunYE?si=ULhSTcoGHMPzTR96
 Step 3: With the codespace set up, we can now move to the next step: Installing the required packages for execution. Miniconda3 is a great service that allows for easy installation of Python packages. Go to the link below and install Miniconda3 and follow the installation instructions:
 https://docs.conda.io/projects/miniconda/en/latest/miniconda-install.html
 
-Step 4: Once installation is done, it's time to install the required packages. Go to your start button and search for "Miniconda Powershell Prompt" and open it in Administrator Mode (this step is very important, as not doing so can cause installations to fail due to not having the required security permissions to proceed).
+Step 4: Once installation is done, it's time to install the required packages. Go to your start button and search for "Miniconda3 Powershell Prompt" and open it in Administrator Mode (this step is very important, as not doing so can cause installations to fail due to not having the required security permissions to proceed).
 
 Step 5: In order to install cartopy, the following commands are needed to install the compulsory dependencies:
 A. pip install matplotlib
