@@ -82,7 +82,7 @@ for i in range(len(cdx)):
         elif status[i] == 'SS':
             plt.scatter(coord_x, coord_y, color='g', marker='s')
         elif status[i] == 'SD':
-            plt.scatter(coord_x, coord_y, color='g', marker='s')
+            plt.scatter(coord_x, coord_y, color='b', marker='s')
         else:
             if int(wind) >= 137:
                 plt.scatter(coord_x, coord_y, color='m', marker='o')
