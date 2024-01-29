@@ -101,7 +101,7 @@ for line in lines:
     elif bt_list[10] == 'SS':
       plt.scatter(coord_x, coord_y, color='g', marker='s')
     elif bt_list[10] == 'SD':
-      plt.scatter(coord_x, coord_y, color='g', marker='s')
+      plt.scatter(coord_x, coord_y, color='b', marker='s')
     else:
       if int(bt_list[8]) >= 137:
         plt.scatter(coord_x, coord_y, color='m', marker='o')
