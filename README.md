@@ -1,4 +1,7 @@
 # Code-for-storms
+
+NOTE: Please read GuideToRunningScripts.txt before running this program. This is especially necessary for Scripts 14 to 20.
+
 1. ACE Calculator - A simple script that produces TC duration & ACE for 6 hour intervals. I may revamp this in the future.
 2. CKZ Script - Input parameters, it will output the pressure for the TC as defined by the landmark Courtney 2009 paper.
 3. Dvorak DT - A C++ script that automatically calculates the DT according to Jack Beven's revision of the Dvorak Technique, circa 2010+.
