@@ -56,7 +56,7 @@ for line in lines:
         stormName = parameters[27].strip()
 
 #-------------------------------DEBUG INFORMATION-----------------------------------
-print(cdx, "\n", cdy, "\n", winds, "\n", status, "\n", timeCheck, "\n")
+print(cdx, "\n", cdy, "\n", winds, "\n", status, "\n", timeCheck, "\n", r34)
 #-----------------------------------------------------------------------------------
 
 #Beginning work on the actual plotting of the data:
@@ -157,17 +157,21 @@ legend_elements = [
                   Line2D([0], [0], marker='o', color='w', label='Category 5',markerfacecolor='m', markersize=10),
 ]
 
+
 #Building the function that calculates ACE...
 def calc_ACE(winds, timeCheck):
     ace = 0
-   
-    for i in range(len(winds)-1):
+    aceList = []
+    for i in range(len(winds)):
         if(winds[i] == ' '):
             continue
         time = int(timeCheck[i]) % 6 #If it is synoptic time and meets...
         if(time==0 and r34[i] == 34 and status[i] not in ['DB', 'LO', 'WV', 'EX']): 
            ace += (int(winds[i]) ** 2) / 10000
+           aceList.append(ace)
+    print(aceList)
     return "{:.4f}".format(ace)
+
 
 #Plotting the TC Path...
 LineX = []
@@ -189,6 +193,6 @@ plt.ylabel('Latitude')
 plt.title(f'{btkID.upper()}{yr} {stormName}')
 plt.title(f'VMAX: {vmax} Kts', loc='left', fontsize=9)
 plt.title(f'ACE: {calc_ACE(winds, timeCheck)}', loc='right', fontsize=9)
-ax.legend(handles=legend_elements, loc='upper left')
+ax.legend(handles=legend_elements, loc='upper right')
 plt.grid(True)
 plt.show()
