@@ -136,7 +136,7 @@ legend_elements = [
 def calc_ACE(winds, timeCheck):
     ace = 0
    
-    for i in range(len(winds)-1):
+    for i in range(len(winds)):
         if(winds[i] == ' '):
             continue
         time = int(timeCheck[i]) % 6
