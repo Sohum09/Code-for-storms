@@ -31,13 +31,14 @@ if(S_ROCI < 0.4):
   S_ROCI = 0.4
   
 #2.R34
-R34 = np.array([R34NE, R34SE, R34SW, R34NW])
-AVGR34 = np.mean(R34)
-V500 = AVGR34/9 -3
-V500c = vmax*(((66.785 - 0.09102*vmax + 1.0619*(latitude-25))/500)**(0.1147 + 0.0055*vmax-0.001*(latitude-25)))
-S_R34 = V500/V500c
-if (S_R34 < 0.4):
-  S_R34 = 0.4
+if Ask == 'yes':
+  R34 = np.array([R34NE, R34SE, R34SW, R34NW])
+  AVGR34 = np.mean(R34)
+  V500 = AVGR34/9 -3
+  V500c = vmax*(((66.785 - 0.09102*vmax + 1.0619*(latitude-25))/500)**(0.1147 + 0.0055*vmax-0.001*(latitude-25)))
+  S_R34 = V500/V500c
+  if (S_R34 < 0.4):
+    S_R34 = 0.4
 
 #From here, we split the formula in two....
 def Pc(V,S,L,P):
@@ -58,3 +59,4 @@ Pc_ROCI = round(Pc(vsrm1,S_ROCI,latitude,envp), 2)
 
 print ("CKZ Result (ROCI): ", int(vmax), "kt,", Pc_ROCI, "mb")
 #Special Thanks: Kathy Chan for inputs on revising the code, Mckuletzz for the CKZ fix sheet for the ROCI formula for S-ratio.
+
