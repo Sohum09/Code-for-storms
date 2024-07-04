@@ -8,6 +8,10 @@ import numpy as np
 from datetime import datetime
 import matplotlib.colors as mcolors
 import matplotlib.patches as mpatches
+from matplotlib.lines import Line2D
+import matplotlib.transforms as transforms
+import math
+import os
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 http = urllib3.PoolManager(cert_reqs='CERT_NONE', assert_hostname=False)
@@ -113,7 +117,8 @@ for data_line in reconHDOB:
     if(minLong > lon):
         minLong = lon 
     
-    fl_wind_dir = float(HDOBfix[8][:3])
+    fl_wind_dir = 180 + float(HDOBfix[8][:3])
+    
     fl_wind_speed=''
     if fl_wind_speed == "///":
         continue
@@ -123,7 +128,7 @@ for data_line in reconHDOB:
     sfmr = HDOBfix[10]
     print(sfmr)
     if sfmr == '///':
-        sfmr = ''
+        sfmr = 'NaN'
     else:
         sfmr = int(sfmr)
 
@@ -143,6 +148,51 @@ for data_line in reconHDOB:
     
     plot_wind_barb(ax, fl_wind_speed, fl_wind_dir, lat, lon, xtrap_val, sfmr, flag)
 
+def calculate_bearing(lat1, lon1, lat2, lon2):
+    # Convert latitude and longitude from degrees to radians
+    lat1 = math.radians(lat1)
+    lon1 = math.radians(lon1)
+    lat2 = math.radians(lat2)
+    lon2 = math.radians(lon2)
+    
+    # Calculate the difference in longitude
+    d_lon = lon2 - lon1
+    
+    # Calculate the bearing
+    x = math.sin(d_lon) * math.cos(lat2)
+    y = math.cos(lat1) * math.sin(lat2) - (math.sin(lat1) * math.cos(lat2) * math.cos(d_lon))
+    initial_bearing = math.atan2(x, y)
+    
+    # Convert bearing from radians to degrees
+    initial_bearing = math.degrees(initial_bearing)
+    
+    # Normalize the bearing
+    bearing = (initial_bearing + 360) % 360
+    
+    return bearing + 180
+
+second_last = reconHDOB[-2].split()
+seclast_lat = (float(second_last[1][:2]) + float(second_last[1][2:4])/60)
+seclast_lat = seclast_lat*-1 if second_last[1][-1] == 'S' else seclast_lat
+seclast_lon = (float(second_last[2][:3]) + float(second_last[2][3:5])/60)
+seclast_lon = seclast_lon*-1 if second_last[2][-1] == 'W' else seclast_lon
+
+plane_Loc = reconHDOB[-1].split()
+plane_lat = (float(plane_Loc[1][:2]) + float(plane_Loc[1][2:4])/60)
+plane_lat = plane_lat*-1 if plane_Loc[1][-1] == 'S' else plane_lat
+plane_lon = (float(plane_Loc[2][:3]) + float(plane_Loc[2][3:5])/60)
+plane_lon = plane_lon*-1 if plane_Loc[2][-1] == 'W' else plane_lat
+
+degrees = calculate_bearing(seclast_lat, seclast_lon, plane_lat, plane_lon)
+
+rotation = transforms.Affine2D().rotate_deg(degrees)
+# Combine the rotation transformation with the current plot's transformation
+transform = rotation + ax.transData
+
+ax.plot(lon, lat, marker=(3, 0, degrees), markersize=20, transform=ax.transData, linestyle='None', color='k')
+
+legend_elements = [Line2D([0], [0], marker='^', color='k', label='Last reported Aircaft Location',markerfacecolor='#444764', markersize=10),]
+
 ax.set_extent([minLong-0.1, maxLong+0.1, minLat-0.1, maxLat+0.1], crs=ccrs.PlateCarree())
 
 # Get the current UTC time
@@ -157,6 +207,7 @@ cmap = mcolors.ListedColormap(colors)
 norm = mcolors.BoundaryNorm(bounds, cmap.N)
 sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
 sm.set_array([])
+ax.legend(handles=legend_elements, loc='upper center')
 
 # Add colorbar to the plot
 cbar = plt.colorbar(sm, ticks=bounds, orientation='horizontal', pad=0.05, aspect=50, ax=ax, shrink=0.5)
