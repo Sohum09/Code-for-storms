@@ -659,6 +659,50 @@ def ir89():
 
     return newcmp.reversed(), vmax, vmin
 
+def fozir():
+    newcmp = LinearSegmentedColormap.from_list("", [
+    (0/150, "#000000"),
+    (20/150, "#603030"),
+    (30/150, "#804040"),
+    (35/150, "#a08080"),
+    (41/150, "#d0d0d0"),
+    (50/150, "#80a0a0"),
+    (60/150, "#407070"),
+    (70/150, "#204040"),
+    (80/150, "#206020"),
+    (91/150, "#30a030"),
+    (97/150, "#80c030"),
+    (103/150, "#d0e030"),
+    (108/150, "#e08020"),
+    (113/150, "#f02010"),
+    (116/150, "#7f1906"),
+    (119/150, "#000000"),
+    (125/150, "#a0a0a0"),
+    (130/150, "#ffffff"),
+    (135/150, "#306090"),
+    (140/150, "#403070"),
+    (145/150, "#a05090"),
+    (150/150, "#f050a0")])
+    vmax = 50 + 273.15
+    vmin = -100 + 273.15
+
+    return newcmp.reversed(), vmax, vmin
+
+def scumsat():
+    newcmp = LinearSegmentedColormap.from_list("", [
+    (0/150, "#7f7f7f"),
+    (41/150, "#e8e8e8"),
+    (41/150, "#2d1b0f"),
+    (80/150, "#bf4c19"),
+    (80/150, "#947f0c"),
+    (113/150, "#42a614"),
+    (113/150, "#a37000"),
+    (150/150, "#ffcc08")])
+
+    vmax = 50
+    vmin = -100
+
+    return newcmp.reversed(), vmax, vmin
 
 import subprocess, sys, datetime, requests
 packages = ["cartopy"]
@@ -675,16 +719,18 @@ import cartopy.feature as cfeature
 from matplotlib.colors import LinearSegmentedColormap
 from datetime import datetime, timedelta
 import glob
+import matplotlib.ticker as mticker
+from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 
 # Custom colormap function with corrected vmin/vmax in Kelvin is present in the Appendix; feel free to add to the collection!
 # Ensure you run the second code first
 
-#-------------------USER INPUT HERE--------------------------------------------------------------
 # Load netCDF data here =
-nc_paths = sorted(glob.glob("*.nc")) #No need to touch this anymore, it automatically loads the files once uploaded
+nc_paths = sorted(glob.glob("/content/*.nc")) #No need to touch this anymore, it automatically loads the files once uploaded
 
+#-------------------USER INPUT HERE--------------------------------------------------------------
 # Generate colormap, vmin, and vmax depending on which one you want
-cmap, vmax, vmin = rammb() # Name of the colorscale should be same as name of the colormap function; refer to appendix
+cmap, vmax, vmin = fozir() # Name of the colorscale should be same as name of the colormap function; refer to appendix
 
 idl_flag = True #If the storm is expected to cross the IDL, set this to True
 #-------------------USER INPUT ENDS---------------------------------------------------------------
@@ -719,13 +765,22 @@ for nc_path in nc_paths:
   # Addding map features
   ax.add_feature(cfeature.COASTLINE, linewidth=1, color='magenta')
   ax.add_feature(cfeature.BORDERS, linestyle=':', linewidth=0.5)
-  gls = ax.gridlines(draw_labels=True, linewidth=0.5, linestyle='--', color='gray')
+
+  if not idl_flag:
+    gls = ax.gridlines(draw_labels=True, linewidth=0.5, linestyle='--', color='gray')
+  else:
+    gls = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True, linewidth=0.5, color='gray', linestyle='--')
+    gls.xlocator = mticker.FixedLocator(range(-180, 181, 3))  # Control gridline spacing
+    gls.ylocator = mticker.FixedLocator(range(-90, 91, 3))
+    #gls.xformatter = LONGITUDE_FORMATTER
+    gls.yformatter = LATITUDE_FORMATTER
+    gls.xlabel_style = {'size': 8, 'color': 'k'}  # Customize label style
+    gls.ylabel_style = {'size': 8, 'color': 'k'}
   gls.top_labels = False
   gls.right_labels = False
 
   # Plotting the CH4 brightness temperature data
-  temp_plot = ax.pcolormesh(lon, lat, ch4_temp, cmap=cmap,
-                            vmin=vmin, vmax=vmax, transform=ccrs.PlateCarree())
+  temp_plot = ax.pcolormesh(lon, lat, ch4_temp, cmap=cmap, vmin=vmin, vmax=vmax, transform=ccrs.PlateCarree())
 
   # Adding the colorbar
   cbar = plt.colorbar(temp_plot, ax=ax, orientation="vertical", shrink=0.7, pad=0.05)
@@ -781,4 +836,3 @@ for nc_path in nc_paths:
   # Display
   plt.savefig(nc_path, format='png', bbox_inches='tight')
 plt.close()
-
