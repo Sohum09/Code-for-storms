@@ -202,5 +202,5 @@ year, month, day, hour = 2019, 10, 7, 12
 lat, lon = 25, 130
 lat_north, lon_west, lat_south, lon_east = lat+2.5, lon-2.5, lat-2.5, lon+2.5  # Define 5×5 grid
 
-#nc_file = retrieve_era5_hodograph(year, month, day, hour, lat_north, lon_west, lat_south, lon_east)
-plot_hodograph("ERA5_hodograph.nc", lat, lon, f"{str(day).zfill(2)}/{str(month).zfill(2)}/{str(year)} at {str(hour)}00 UTC")
+nc_file = retrieve_era5_hodograph(year, month, day, hour, lat_north, lon_west, lat_south, lon_east)
+plot_hodograph(nc_file, lat, lon, f"{str(day).zfill(2)}/{str(month).zfill(2)}/{str(year)} at {str(hour)}00 UTC")
