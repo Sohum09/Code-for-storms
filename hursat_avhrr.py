@@ -1,7 +1,5 @@
-#RUN THE CODE SECTION BELOW THIS CODE FIRST!
-
-#Appendix: A list of color tables courtesy Deelan Jariwala you can use in place of the other IR tables: RUN THIS FIRST!
-
+#Appendix: A list of color tables courtesy Deelan Jariwale, Elliot Fossier and "Adam" you can use in place of the other IR tables: RUN THIS FIRST!
+from matplotlib.colors import LinearSegmentedColormap
 def bd():
     newcmp = LinearSegmentedColormap.from_list("", [
         (0/120, "#a8d1ff"), (11/120, "#000000"),
@@ -659,6 +657,34 @@ def ir89():
 
     return newcmp.reversed(), vmax, vmin
 
+def fozbd():
+    newcmp = LinearSegmentedColormap.from_list("", [
+    (0/150, "#997373"),
+    (30/150, "#e6bfbf"),
+    (30/150, "#a6a6a6"),
+    (41/150, "#e6e6e6"),
+    (41/150, "#7e9898"),
+    (80/150, "#cce6e6"),
+    (80/150, "#0c4c8c"),
+    (91/150, "#73b2f2"),
+    (91/150, "#097222"),
+    (103/150, "#25ff3f"),
+    (103/150, "#a3a302"),
+    (113/150, "#ffff19"),
+    (113/150, "#7f3f0c"),
+    (119/150, "#ff7f19"),
+    (119/150, "#7f1906"),
+    (125/150, "#ff330c"),
+    (125/150, "#650f33"),
+    (130/150, "#ff1965"),
+    (130/150, "#6d356d"),
+    (150/150, "#ff65ff")])
+
+    vmax = 50 + 273.15
+    vmin = -100 + 273.15
+
+    return newcmp.reversed(), vmax, vmin
+
 def fozir():
     newcmp = LinearSegmentedColormap.from_list("", [
     (0/150, "#000000"),
@@ -704,8 +730,99 @@ def scumsat():
 
     return newcmp.reversed(), vmax, vmin
 
+def crys1():
+    newcmp = LinearSegmentedColormap.from_list("", [
+    (0/150, "#000000"),
+    (20/150, "#ff80ff"),
+    (30/150, "#ffb3ff"),
+    (35/150, "#ffe6ff"),
+    (41/150, "#f9e6ff"),
+    (50/150, "#d1b3ff"),
+    (60/150, "#b380ff"),
+    (70/150, "#944dff"),
+    (80/150, "#ff4d4d"),
+    (91/150, "#ff8080"),
+    (97/150, "#ffcccc"),
+    (103/150, "#ccf5ff"),
+    (108/150, "#ccffff"),
+    (113/150, "#ccd9ff"),
+    (116/150, "#3366ff"),
+    (119/150, "#400080"),
+    (125/150, "#8c1aff"),
+    (130/150, "#d9b3ff"),
+    (135/150, "#000099"),
+    (140/150, "#000066"),
+    (145/150, "#1a1aff"),
+    (150/150, "#8080ff")])
+
+    vmax = 50 + 273.15
+    vmin = -100 + 273.15
+
+    return newcmp.reversed(), vmax, vmin
+
+def crys2():
+    newcmp = LinearSegmentedColormap.from_list("", [
+    (0/150, "#000000"),
+    (20/150, "#330033"),
+    (30/150, "#ff00ff"),
+    (35/150, "#f9e6ff"),
+    (41/150, "#f0e6ff"),
+    (50/150, "#d1b3ff"),
+    (60/150, "#b380ff"),
+    (70/150, "#944dff"),
+    (80/150, "#ff4d4d"),
+    (91/150, "#ff8080"),
+    (97/150, "#ffcccc"),
+    (103/150, "#ccd9ff"),
+    (108/150, "#ccffff"),
+    (113/150, "#1a53ff"),
+    (116/150, "#002db3"),
+    (119/150, "#400080"),
+    (125/150, "#8c1aff"),
+    (130/150, "#d9b3ff"),
+    (135/150, "#000099"),
+    (140/150, "#000066"),
+    (145/150, "#1a1aff"),
+    (150/150, "#8080ff")])
+
+    vmax = 50 + 273.15
+    vmin = -100 + 273.15
+
+    return newcmp.reversed(), vmax, vmin
+
+def crys3():
+    newcmp = LinearSegmentedColormap.from_list("", [
+    (0/150, "#000000"),
+    (20/150, "#000000"),
+    (28/150, "#33ccff"),
+    (35/150, "#f9e6ff"),
+    (41/150, "#f0e6ff"),
+    (50/150, "#d1b3ff"),
+    (60/150, "#b380ff"),
+    (70/150, "#944dff"),
+    (80/150, "#ff4d4d"),
+    (91/150, "#ff8080"),
+    (97/150, "#ffcccc"),
+    (103/150, "#668aff"),
+    (108/150, "#3366ff"),
+    (113/150, "#0039e6"),
+    (116/150, "#002699"),
+    (119/150, "#400080"),
+    (125/150, "#8c1aff"),
+    (130/150, "#b366ff"),
+    (135/150, "#d9b3ff"),
+    (140/150, "#FFFFFF"),
+    (145/150, "#FFFFFF"),
+    (150/150, "#FFFFFF")])
+
+    vmax = 50 + 273.15
+    vmin = -100 + 273.15
+
+    return newcmp.reversed(), vmax, vmin
+
+
 import subprocess, sys, datetime, requests
-packages = ["cartopy"]
+packages = ["cartopy", "numpy", "xarray", "datetime", "glob"]
 for package in packages:
     try:
         __import__(package)
@@ -719,18 +836,16 @@ import cartopy.feature as cfeature
 from matplotlib.colors import LinearSegmentedColormap
 from datetime import datetime, timedelta
 import glob
-import matplotlib.ticker as mticker
-from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 
 # Custom colormap function with corrected vmin/vmax in Kelvin is present in the Appendix; feel free to add to the collection!
 # Ensure you run the second code first
 
-# Load netCDF data here =
-nc_paths = sorted(glob.glob("/content/*.nc")) #No need to touch this anymore, it automatically loads the files once uploaded
-
 #-------------------USER INPUT HERE--------------------------------------------------------------
+# Load netCDF data here =
+nc_paths = sorted(glob.glob(r"C:\Users\USER\Downloads\Archived_NOAA_CLASS_Downloads\1986 WPAC\Forrest 1986\AVHRR\*.nc")) #No need to touch this anymore, it automatically loads the files once uploaded
+
 # Generate colormap, vmin, and vmax depending on which one you want
-cmap, vmax, vmin = fozir() # Name of the colorscale should be same as name of the colormap function; refer to appendix
+cmap, vmax, vmin = ibtracs2() # Name of the colorscale should be same as name of the colormap function; refer to appendix
 
 idl_flag = True #If the storm is expected to cross the IDL, set this to True
 #-------------------USER INPUT ENDS---------------------------------------------------------------
@@ -765,22 +880,13 @@ for nc_path in nc_paths:
   # Addding map features
   ax.add_feature(cfeature.COASTLINE, linewidth=1, color='magenta')
   ax.add_feature(cfeature.BORDERS, linestyle=':', linewidth=0.5)
-
-  if not idl_flag:
-    gls = ax.gridlines(draw_labels=True, linewidth=0.5, linestyle='--', color='gray')
-  else:
-    gls = ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=True, linewidth=0.5, color='gray', linestyle='--')
-    gls.xlocator = mticker.FixedLocator(range(-180, 181, 3))  # Control gridline spacing
-    gls.ylocator = mticker.FixedLocator(range(-90, 91, 3))
-    #gls.xformatter = LONGITUDE_FORMATTER
-    gls.yformatter = LATITUDE_FORMATTER
-    gls.xlabel_style = {'size': 8, 'color': 'k'}  # Customize label style
-    gls.ylabel_style = {'size': 8, 'color': 'k'}
+  gls = ax.gridlines(draw_labels=True, linewidth=0.5, linestyle='--', color='gray')
   gls.top_labels = False
   gls.right_labels = False
 
   # Plotting the CH4 brightness temperature data
-  temp_plot = ax.pcolormesh(lon, lat, ch4_temp, cmap=cmap, vmin=vmin, vmax=vmax, transform=ccrs.PlateCarree())
+  temp_plot = ax.pcolormesh(lon, lat, ch4_temp, cmap=cmap,
+                            vmin=vmin, vmax=vmax, transform=ccrs.PlateCarree())
 
   # Adding the colorbar
   cbar = plt.colorbar(temp_plot, ax=ax, orientation="vertical", shrink=0.7, pad=0.05)
@@ -834,5 +940,6 @@ for nc_path in nc_paths:
   )
 
   # Display
-  plt.savefig(nc_path, format='png', bbox_inches='tight')
+  plt.savefig(nc_path[:-3] + '.png', format='png', bbox_inches='tight')
 plt.close()
+
