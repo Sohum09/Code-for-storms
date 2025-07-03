@@ -5,12 +5,6 @@ from urllib.parse import quote
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 http = urllib3.PoolManager(cert_reqs='CERT_NONE', assert_hostname=False)
 
-sensors = ['amsr2', 'gmi', 'tms', 'ssmis']
-products = ['89H', '91H']
-
-sensor_str = ','.join(sensors)
-product_str = ','.join(products)
-
 url = f"https://science.nrlmry.navy.mil/geoips/prod_api/tcweb/products/2025?storm_id=wp042025&sensor=amsr2&sensor=gmi&sensor=tms&sensor=ssmis&product=89H&product=91H"
 
 # Make the request
