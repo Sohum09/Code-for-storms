@@ -21,7 +21,7 @@ datastore = DataStore(token)
 selected_collection = datastore.get_collection('EO:EUM:DAT:METOP:OAS025')
 
 # Set sensing start and end time
-end = datetime.datetime(2025, 8, 20, 6, 0)
+end = datetime.datetime(2025, 9, 7, 9, 0)
 start = end - datetime.timedelta(hours=6)
 
 selected_products = selected_collection.search(dtstart = start, dtend = end)
@@ -77,7 +77,7 @@ import xarray as xr
 import os
 
 # Get a list of all files in the current directory
-all_files = os.listdir('.nc')
+all_files = os.listdir('.')
 
 # Filter for NetCDF files that start with 'ascat_' and end with '.nc'
 netcdf_files = [f for f in all_files if f.startswith('ascat_') and f.endswith('.nc')]
@@ -98,7 +98,7 @@ for nc_file in netcdf_files:
 
 print("All specified NetCDF files have been processed.")
 
-center_lat, center_lon = 28, -73
+center_lat, center_lon = 16.8, -142.9
 
 min_lat = center_lat-5
 max_lat = center_lat+5
@@ -108,6 +108,7 @@ max_lon = center_lon+5
 # Calculate the center latitude and longitude for the plot
 plot_center_lat = (min_lat + max_lat) / 2
 plot_center_lon = (min_lon + max_lon) / 2
+plot_center_lon = plot_center_lon + 360 if plot_center_lon < 0 else plot_center_lon
 
 print(f"Plot Center Latitude: {plot_center_lat}")
 print(f"Plot Center Longitude: {plot_center_lon}")
@@ -117,16 +118,20 @@ import numpy as np
 # Initialize variables to store the minimum distance and nearest pixel information
 min_distance = float('inf')
 nearest_pixel_info = None
-
+max_wind = 0
 for filename, ds in datasets.items():
     try:
         lat_values = ds['lat'].values
         lon_values = ds['lon'].values
+        wind_speed_values = ds['wind_speed'].values * 1.94384  # Convert from m/s to knots
         for row_index in range(lat_values.shape[0]):
             for col_index in range(lat_values.shape[1]):
                 pixel_lat = lat_values[row_index, col_index]
                 pixel_lon = lon_values[row_index, col_index]
                 distance = np.sqrt((pixel_lat - plot_center_lat)**2 + (pixel_lon - plot_center_lon)**2)
+                if distance <= 5:
+                    if max_wind < wind_speed_values[row_index, col_index]:
+                        max_wind = wind_speed_values[row_index, col_index]
                 if distance < min_distance:
                     min_distance = distance
                     nearest_pixel_info = (filename, (row_index, col_index))
@@ -228,7 +233,7 @@ for filename, ds in datasets.items():
         print(f"Error processing dataset {filename}: {e}")
 
 # Create the plot title with the wind information and the time of the nearest pixel
-title_string = f'ASCAT 25km Winds | {satellite_search.upper()} | {formatted_time_string} UTC'
+title_string = f'ASCAT 25km Winds | {satellite_search.upper()} | {formatted_time_string} UTC\nMax Winds (unconverted) = {max_wind}'
 
 
 ax.set_title(title_string)
