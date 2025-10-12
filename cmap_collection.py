@@ -1006,8 +1006,8 @@ def fozbd2():
     (130/150, "#403070"),
     (150/150, "#403070")])
 
-    vmax = 50
-    vmin = -100
+    vmax = 50 + 273.15
+    vmin = -100 + 273.15
 
     return newcmp.reversed(), vmax, vmin
 
@@ -1051,8 +1051,8 @@ def scumsat():
     (113/150, "#a37000"),
     (150/150, "#ffcc08")])
 
-    vmax = 50
-    vmin = -100
+    vmax = 50 + 273.15
+    vmin = -100 + 273.15
 
     return newcmp.reversed(), vmax, vmin
 
