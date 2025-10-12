@@ -433,7 +433,6 @@ def blhot():
     return newcmp.reversed(), vmax, vmin
 
 def bd05():
-    def bd05():
     newcmp = LinearSegmentedColormap.from_list("", [
     (0/120, "#000000"),
     (21/120, "#FFFFFF"),
@@ -462,8 +461,8 @@ def bd05():
     (110/120, "#555555"),
     (120/120, "#555555")])
 
-    vmax = 30
-    vmin = -90
+    vmax = 30 + 273.15
+    vmin = -90 + 273.15
 
     return newcmp.reversed(), vmax, vmin
 
