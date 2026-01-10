@@ -19,6 +19,34 @@ def bd():
     vmin = -90 + 273.15  # -90°C to Kelvin
     return newcmp.reversed(), vmax, vmin
 
+def rbbd():
+    newcmp = LinearSegmentedColormap.from_list("", [
+    (0/130, "#000000"), #VWMG
+    (10/130, "#7F7F7F"), #VWMG
+    (10/130, "#00001F"), #WMG
+    (21/130, "#7F7F9F"), #WMG
+    (21/130, "#00003F"), #OW
+    (60/130, "#7F7FBF"), #OW
+    (60/130, "#0c4c8c"), #DG
+    (71/130, "#73e3f2"), #DG
+    (71/130, "#3b747c"), #MG
+    (83/130, "#34d22c"), #MG
+    (83/130, "#269120"), #LG
+    (93/130, "#fcff51"), #LG
+    (93/130, "#b4b63c"), #B
+    (99/130, "#ff7f19"), #B
+    (99/130, "#ad5812"), #W
+    (105/130, "#ff330c"), #W
+    (105/130, "#ad2207"), #CMG
+    (110/130, "#ff19a3"), #CMG
+    (110/130, "#92115e"), #CDG
+    (130/130, "#ffc2ff")]) #CDG
+
+    vmax = 30 + 273.15
+    vmin = -100 + 273.15
+
+    return newcmp.reversed(), vmax, vmin
+
 def rammb():
     newcmp = LinearSegmentedColormap.from_list("", [
     (0/150, "#b55555"),
@@ -1332,6 +1360,84 @@ def oldcrys6():
 
     return newcmp.reversed(), vmax, vmin
 
+def crys8():
+    newcmp = LinearSegmentedColormap.from_list("", [
+    (0/150, "#000000"),
+    (10/150, "#000000"),
+    (20/150, "#1a1a1a"),
+    (60/150, "#FFFFFF"),
+
+    (97/150, "#392613"),
+
+    (103/150, "#663300"),
+    (113/150, "#e67300"),
+    (116/150, "#ffcc99"),
+    (119/150, "#1a0d00"),
+    (125/150, "#BE394F"),
+    (130/150, "#EFDADD"),
+    (135/150, "#854C65"),
+    (140/150, "#704A49"),
+    
+    (145/150, "#000000"),
+    (150/150, "#FFFFFF")])
+
+    vmax = 50 + 273.15
+    vmin = -100 + 273.15
+
+    return newcmp.reversed(), vmax, vmin
+
+def crys8v2():
+    newcmp = LinearSegmentedColormap.from_list("", [
+    (0/150, "#000000"),
+    (10/150, "#000000"),
+    (20/150, "#1a1a1a"),
+    (60/150, "#FFFFFF"),
+
+    (97/150, "#392613"),
+
+    (103/150, "#663300"),
+    (113/150, "#e67300"),
+    (116/150, "#ffcc99"),
+    (119/150, "#1a0d00"),
+    (125/150, "#BE394F"),
+    (130/150, "#EFDADD"),
+    
+    (135/150, "#4d194d"), #CDG
+    (145/150, "#FFFFFF"),
+    (150/150, "#000000")])
+
+    vmax = 50 + 273.15
+    vmin = -100 + 273.15
+
+    return newcmp.reversed(), vmax, vmin
+def cryshulk():
+    newcmp = LinearSegmentedColormap.from_list("", [
+    (0/150, "#000000"),
+    (10/150, "#000000"),
+
+    (20/150, "#092244"),
+    (24/150, "#0f3971"),
+    (60/150, "#FFFFFF"),
+
+    (97/150, "#0c270c"),
+
+    (103/150, "#194d19"),
+    (113/150, "#339933"),
+    (116/150, "#8cd98c"),
+    (119/150, "#061306"),
+    (125/150, "#b566ff"),
+    (130/150, "#6900cc"),
+    (135/150, "#4f0099"),
+    (140/150, "#1a0033"),
+    
+    (145/150, "#000000"),
+    (150/150, "#FFFFFF")])
+
+    vmax = 50 + 273.15
+    vmin = -100 + 273.15
+
+    return newcmp.reversed(), vmax, vmin
+
 def ir16():
     newcmp = LinearSegmentedColormap.from_list("", [
     (0/150, "#000000"),
@@ -2392,20 +2498,21 @@ def handir():
 
 def ott2():
     newcmp = LinearSegmentedColormap.from_list("", [
-    (0/150, "#000000"),
-    (15/150, "#000000"),
-    (70/150, "#c8c8c8"),
-    (70/150, "#00c8fa"),
-    (80/150, "#000064"),
-    (90/150, "#00fa00"),
-    (100/150, "#fafa00"),
-    (110/150, "#fa0000"),
-    (120/150, "#000000"),
-    (130/150, "#fafafa"),
-    (130/150, "#fa7dc8"),
-    (140/150, "#640064"),
-    (140/150, "#fafa00"),
-    (150/150, "#000000")])
+        (0/150, "#000000"),
+        (10/150, "#000000"),
+        (70/150, "#c8c8c8"),
+        (70/150, "#00fafa"),
+        (80/150, "#000064"),
+        (90/150, "#00fa00"),
+        (100/150, "#fafa00"),
+        (110/150, "#fa0000"),
+        (120/150, "#000000"),
+        (130/150, "#e1e1e1"),
+        (130/150, "#fa7daf"),
+        (140/150, "#640064"),
+        (140/150, "#fafa00"),
+        (150/150, "#000000"),
+    ])
 
     vmax = 50 + 273.15
     vmin = -100 + 273.15
@@ -2590,6 +2697,41 @@ def crysstrbry():
     vmin = -100 + 273.15
 
     return newcmp.reversed(), vmax, vmin
+
+def xiqqcc():
+
+    vmax = 28 + 273.15
+    vmin = -100 + 273.15
+
+    def convert_to_kelvin(val):
+        return val + 273.15
+
+    newcmp = LinearSegmentedColormap.from_list("", [
+    ((convert_to_kelvin(-100)-vmin)/(vmax-vmin), "#ffffff"),
+    ((convert_to_kelvin(-92)-vmin)/(vmax-vmin), "#fad2fa"),
+    ((convert_to_kelvin(-92)-vmin)/(vmax-vmin), "#d7d7e1"),
+    ((convert_to_kelvin(-85.5)-vmin)/(vmax-vmin), "#7171e1"),
+    ((convert_to_kelvin(-85.5)-vmin)/(vmax-vmin), "#4132a0"),
+    ((convert_to_kelvin(-80.5)-vmin)/(vmax-vmin), "#000087"),
+    ((convert_to_kelvin(-80.5)-vmin)/(vmax-vmin), "#231ee1"),
+    ((convert_to_kelvin(-75.5)-vmin)/(vmax-vmin), "#5a50f5"),
+    ((convert_to_kelvin(-75.5)-vmin)/(vmax-vmin), "#1478f0"),
+    ((convert_to_kelvin(-69.5)-vmin)/(vmax-vmin), "#28b4f0"),
+    ((convert_to_kelvin(-69.5)-vmin)/(vmax-vmin), "#5acdf0"),
+    ((convert_to_kelvin(-63.5)-vmin)/(vmax-vmin), "#afffff"),
+    ((convert_to_kelvin(-63.5)-vmin)/(vmax-vmin), "#ffff50"),
+    ((convert_to_kelvin(-53.5)-vmin)/(vmax-vmin), "#ffbe32"),
+    ((convert_to_kelvin(-53.5)-vmin)/(vmax-vmin), "#ff8c00"),
+    ((convert_to_kelvin(-41.5)-vmin)/(vmax-vmin), "#dc5a00"),
+    ((convert_to_kelvin(-41.5)-vmin)/(vmax-vmin), "#a02300"),
+    ((convert_to_kelvin(-30.5)-vmin)/(vmax-vmin), "#640000"),
+    ((convert_to_kelvin(-30.5)-vmin)/(vmax-vmin), "#e1b9b9"),
+    ((convert_to_kelvin(9.5)-vmin)/(vmax-vmin), "#734b4b"),
+    ((convert_to_kelvin(9.5)-vmin)/(vmax-vmin), "#ffffff"),
+    ((convert_to_kelvin(28)-vmin)/(vmax-vmin), '#000000'),
+])
+
+    return newcmp, vmax, vmin
 
 #-----------------------Intersection: WV Color tables from here----------------------------
 
